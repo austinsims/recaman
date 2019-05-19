@@ -1,5 +1,5 @@
-const WIDTH = 500;
-const HEIGHT = 300;
+import {WIDTH, HEIGHT} from './consts.js';
+
 const ID_CANVAS = 'c';
 
 export const Side = {
@@ -46,6 +46,6 @@ function createCanvas() {
 
 function createStage() {
   const stage = new createjs.Stage(ID_CANVAS);
-  stage.y = 150;
+  stage.y = HEIGHT / 2;
   return stage;
 }

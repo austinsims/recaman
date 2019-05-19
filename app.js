@@ -1,8 +1,6 @@
+import {SCALE, LIMIT} from './consts.js';
 import {draw, Side} from './draw.js';
 import {recaman} from './sequence.js';
-
-const SCALE = 10;
-const LIMIT = 20;
 
 const seq = recaman(LIMIT);
 
