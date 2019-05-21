@@ -1,5 +1,5 @@
 Renders [Recamán's sequence](https://oeis.org/A005132) with
-[EaselJS](https://www.createjs.com/easeljs). See See Numberphile's video
+[EaselJS](https://www.createjs.com/easeljs). See Numberphile's video
 [The Slightly Spooky Recamán Sequence](https://www.youtube.com/watch?v=FGC5TdIiT9U).
 
 The first few elements:
