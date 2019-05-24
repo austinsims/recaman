@@ -7,45 +7,58 @@ export const Side = {
   BOTTOM: 1,
 };
 
-export function draw(arcs) {
-  createCanvas();
-  const stage = createStage();
-
-  for (const arc of arcs) {
-    if (!(arc.right > arc.left)) {
-      throw new Error('right must be greater than left');
-    }
-    if (!(arc.side === Side.TOP || arc.side === Side.BOTTOM)) {
-      throw new Error('side must be Side.TOP or Side.BOTTOM');
-    }
-    const radius = (arc.right - arc.left) / 2;
-    const midpoint = (arc.right + arc.left) / 2;
-    const shape = new createjs.Shape();
-    const graphics = shape.graphics.beginStroke('blue');
-    switch (arc.side) {
-      case Side.TOP:
-        graphics.arc(midpoint, 0, radius, Math.PI, 2*Math.PI);
-        break;
-      case Side.BOTTOM:
-        graphics.arc(midpoint, 0, radius, 0, Math.PI);
-        break;
-    }
-    stage.addChild(shape);
+export class Draw {
+  constructor() {
+    this.init();
   }
 
-  stage.update();
-}
+  update(arcs) {
+    this.init();
 
-function createCanvas() {
-  const canvas = document.createElement('canvas');
-  canvas.id = ID_CANVAS;
-  canvas.width = WIDTH;
-  canvas.height = HEIGHT;
-  document.body.appendChild(canvas);
-}
+    for (const arc of arcs) {
+      if (!(arc.right > arc.left)) {
+        throw new Error('right must be greater than left');
+      }
+      if (!(arc.side === Side.TOP || arc.side === Side.BOTTOM)) {
+        throw new Error('side must be Side.TOP or Side.BOTTOM');
+      }
+      const radius = (arc.right - arc.left) / 2;
+      const midpoint = (arc.right + arc.left) / 2;
+      const shape = new createjs.Shape();
+      const graphics = shape.graphics.beginStroke('blue');
+      switch (arc.side) {
+        case Side.TOP:
+          graphics.arc(midpoint, 0, radius, Math.PI, 2*Math.PI);
+          break;
+        case Side.BOTTOM:
+          graphics.arc(midpoint, 0, radius, 0, Math.PI);
+          break;
+      }
+      this.stage.addChild(shape);
+    }
 
-function createStage() {
-  const stage = new createjs.Stage(ID_CANVAS);
-  stage.y = HEIGHT / 2;
-  return stage;
+    this.stage.update();
+  }
+
+  makeCanvas() {
+    this.canvas = document.createElement('canvas');
+    this.canvas.id = ID_CANVAS;
+    this.canvas.width = WIDTH;
+    this.canvas.height = HEIGHT;
+    document.body.appendChild(this.canvas);
+  }
+
+  makeStage() {
+    this.stage = new createjs.Stage(ID_CANVAS);
+    this.stage.y = HEIGHT / 2;
+  }
+
+  init() {
+    if (this.canvas) {
+      this.canvas.remove();
+    }
+    this.makeCanvas();
+    this.makeStage();
+  }
+
 }
